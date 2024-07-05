@@ -2,7 +2,7 @@
 
 import { Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize({
+const sequelizeInstance = new Sequelize({
   dialect: 'postgres',
   database: 'postgres',
   username: 'shailaja',
@@ -11,25 +11,24 @@ const sequelize = new Sequelize({
   port: 5432,
   // other options
 });
- async function testConnection(){
-    try{
-        await sequelize.authenticate();
-      console.log('Connection has been established');
-   }catch (error){
-        console.error('Connection not done yet');
-    }
- }
- testConnection();
 
-  async function syncModels() {
-    try {
-        await sequelize.sync({ force: true }); // Use force: true cautiously in development
-       console.log('Database synchronized successfully');
-    } catch (error) {
-        console.error('Error syncing database:', error);
-     }
- }
+async function testConnection(): Promise<void> {
+  try {
+    await sequelizeInstance.authenticate();
+    console.log('Connection has been established');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
+testConnection();
 
- syncModels();
-
-export { sequelize };
+async function syncModels(): Promise<void> {
+  try {
+    await sequelizeInstance.sync({ force: true }); 
+    console.log('Database synchronized successfully');
+  } catch (error) {
+    console.error('Error syncing database:', error);
+  }
+}
+syncModels();
+export { sequelizeInstance, testConnection, syncModels };

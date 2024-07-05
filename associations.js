@@ -36,61 +36,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.syncModels = exports.testConnection = exports.sequelizeInstance = void 0;
-var sequelize_1 = require("sequelize");
-var sequelizeInstance = new sequelize_1.Sequelize({
-    dialect: 'postgres',
-    database: 'postgres',
-    username: 'shailaja',
-    password: '1121',
-    host: 'localhost',
-    port: 5432,
-    // other options
-});
-exports.sequelizeInstance = sequelizeInstance;
-function testConnection() {
-    return __awaiter(this, void 0, void 0, function () {
-        var error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, sequelizeInstance.authenticate()];
-                case 1:
-                    _a.sent();
-                    console.log('Connection has been established');
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_1 = _a.sent();
-                    console.error('Unable to connect to the database:', error_1);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
+exports.Associations = void 0;
+var books_1 = require("./models/books");
+var authors_1 = require("./models/authors");
+var loans_1 = require("./models/loans");
+var members_1 = require("./models/members");
+var reservations_1 = require("./models/reservations");
+var Associations = function () { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        // Books and Authors
+        books_1.default.belongsTo(authors_1.default, { foreignKey: 'authorId' });
+        authors_1.default.hasMany(books_1.default, { foreignKey: 'authorId' });
+        //Loans, Members and Books
+        books_1.default.hasMany(loans_1.default, { foreignKey: 'book_id' });
+        loans_1.default.belongsTo(books_1.default, { foreignKey: 'book_id' });
+        members_1.default.hasMany(loans_1.default, { foreignKey: 'member_id' });
+        loans_1.default.belongsTo(members_1.default, { foreignKey: 'member_id' });
+        //Reservations, Books, Members
+        members_1.default.hasMany(reservations_1.default, { foreignKey: 'member_id' });
+        reservations_1.default.belongsTo(members_1.default, { foreignKey: 'member_id' });
+        books_1.default.hasMany(reservations_1.default, { foreignKey: 'book_id' });
+        reservations_1.default.belongsTo(books_1.default, { foreignKey: 'book_id' });
+        return [2 /*return*/];
     });
-}
-exports.testConnection = testConnection;
-testConnection();
-function syncModels() {
-    return __awaiter(this, void 0, void 0, function () {
-        var error_2;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, sequelizeInstance.sync({ force: true })];
-                case 1:
-                    _a.sent();
-                    console.log('Database synchronized successfully');
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_2 = _a.sent();
-                    console.error('Error syncing database:', error_2);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    });
-}
-exports.syncModels = syncModels;
-syncModels();
+}); };
+exports.Associations = Associations;

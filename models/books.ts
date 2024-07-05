@@ -1,9 +1,8 @@
-
-
 import { DataTypes } from 'sequelize';
-import { sequelize } from '../database'; // Adjust the path as per your file structure
+import { sequelizeInstance } from '../database';
 
-const Book = sequelize.define('Book', {
+
+const Book = sequelizeInstance.define('Book', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -35,5 +34,6 @@ const Book = sequelize.define('Book', {
 }, {
   tableName: 'books'
 });
+
 
 export default Book;

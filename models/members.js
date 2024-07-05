@@ -1,9 +1,8 @@
 "use strict";
-// models/members.ts
 Object.defineProperty(exports, "__esModule", { value: true });
 var sequelize_1 = require("sequelize");
-var database_1 = require("../database"); // Assuming 'database.ts' exports 'sequelize'
-var Member = database_1.sequelize.define('Member', {
+var database_1 = require("../database");
+var Member = database_1.sequelizeInstance.define('Member', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
