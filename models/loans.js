@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var sequelize_1 = require("sequelize");
-var database_1 = require("../database");
-var Loan = database_1.sequelizeInstance.define('Loan', {
+var con_1 = require("../con");
+var Loan = con_1.default.define('Loan', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,

@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
-import { sequelizeInstance } from '../database';
+import sequelize from '../con';
 
-const Member = sequelizeInstance.define('Member', {
+const Member = sequelize.define('Member', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -12,10 +12,12 @@ const Member = sequelizeInstance.define('Member', {
     allowNull: false
   },
   address: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull:false
   },
   phone_number: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull:false
   },
   email: {
     type: DataTypes.STRING,

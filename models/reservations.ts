@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
-import { sequelizeInstance } from '../database';
+import sequelize from '../con';
 
-const Reservation = sequelizeInstance.define('Reservation', {
+const Reservation = sequelize.define('Reservation', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var sequelize_1 = require("sequelize");
-var database_1 = require("../database");
-var Member = database_1.sequelizeInstance.define('Member', {
+var con_1 = require("../con");
+var Member = con_1.default.define('Member', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
@@ -13,10 +13,12 @@ var Member = database_1.sequelizeInstance.define('Member', {
         allowNull: false
     },
     address: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     phone_number: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     },
     email: {
         type: sequelize_1.DataTypes.STRING,

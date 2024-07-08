@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
-import { sequelizeInstance } from '../database';
+import sequelize from '../con';
 
-const Author = sequelizeInstance.define('Author', {
+const Author = sequelize.define('Author', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -12,13 +12,15 @@ const Author = sequelizeInstance.define('Author', {
     allowNull: false
   },
   birth_year: {
-    type: DataTypes.INTEGER
+    type: DataTypes.STRING,
+    allowNull: false
   },
   nationality: {
     type: DataTypes.STRING
   }
 }, {
-  tableName: 'authors'
+  tableName: 'authors',
+  timestamps: false // If you don't want createdAt and updatedAt fields
 });
 
 export default Author;

@@ -36,26 +36,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.syncModels = exports.testConnection = exports.sequelizeInstance = void 0;
-var sequelize_1 = require("sequelize");
-var sequelizeInstance = new sequelize_1.Sequelize({
-    dialect: 'postgres',
-    database: 'postgres',
-    username: 'shailaja',
-    password: '1121',
-    host: 'localhost',
-    port: 5432,
-    // other options
-});
-exports.sequelizeInstance = sequelizeInstance;
-function testConnection() {
+var con_1 = require("./con");
+var authors_1 = require("./models/authors");
+var books_1 = require("./models/books");
+var loans_1 = require("./models/loans");
+var members_1 = require("./models/members");
+var insert_data_1 = require("./insert_data");
+function main() {
     return __awaiter(this, void 0, void 0, function () {
         var error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, sequelizeInstance.authenticate()];
+                    return [4 /*yield*/, con_1.default.authenticate()];
                 case 1:
                     _a.sent();
                     console.log('Connection has been established');
@@ -64,33 +58,43 @@ function testConnection() {
                     error_1 = _a.sent();
                     console.error('Unable to connect to the database:', error_1);
                     return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    });
-}
-exports.testConnection = testConnection;
-testConnection();
-function syncModels() {
-    return __awaiter(this, void 0, void 0, function () {
-        var error_2;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, sequelizeInstance.sync({ force: true })];
-                case 1:
+                case 3: return [4 /*yield*/, authors_1.default.sync({ force: true })];
+                case 4:
                     _a.sent();
-                    console.log('Database synchronized successfully');
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_2 = _a.sent();
-                    console.error('Error syncing database:', error_2);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    console.log('Author model is created');
+                    return [4 /*yield*/, authors_1.default.bulkCreate(insert_data_1.authorsData)];
+                case 5:
+                    _a.sent();
+                    console.log('Authors inserted successfully');
+                    return [4 /*yield*/, books_1.default.sync({ force: true })];
+                case 6:
+                    _a.sent();
+                    console.log('Book model is created');
+                    return [4 /*yield*/, books_1.default.bulkCreate(insert_data_1.booksData)];
+                case 7:
+                    _a.sent();
+                    console.log('Books inserted successfully');
+                    return [4 /*yield*/, members_1.default.sync({ force: true })];
+                case 8:
+                    _a.sent();
+                    console.log('Member model is created');
+                    return [4 /*yield*/, members_1.default.bulkCreate(insert_data_1.membersData)];
+                case 9:
+                    _a.sent();
+                    console.log('Members inserted successfully');
+                    return [4 /*yield*/, loans_1.default.sync({ force: true })];
+                case 10:
+                    _a.sent();
+                    console.log('Loan model is created');
+                    return [4 /*yield*/, loans_1.default.bulkCreate(insert_data_1.loansData)];
+                case 11:
+                    _a.sent();
+                    console.log('Loans inserted successfully');
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports.syncModels = syncModels;
-syncModels();
+main();
+exports.default = con_1.default;
+console.table(books_1.default);
