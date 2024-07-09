@@ -1,95 +1,65 @@
 
-/*import Book from './models/book'; 
-
-export async function createBook(bookData: any): Promise<void> {
-  try {
-    await Book.create(bookData);
-    console.log('Created book successfully');
-  } catch (error) {
-    console.error('Error creating book:', error);
-    throw error;
-  }
-}
-
-
-import { booksData } from './insert_data'; // Assuming booksData is imported from insert_data.ts
-booksData.forEach(async (book) => {
-  try {
-    await createBook(book);
-  } catch (error) {
-    console.error('Error creating book:', error);
-  }
-});
-
-
-export async function getAllBooks(): Promise<void> {
+import Author from '../models/authors';
+import Book from '../models/books';
+ 
+async function createBook() {
     try {
-      const books = await Book.findAll();
-      books.forEach(book => console.log(book.toJSON()));
-      console.log('Retrieved all books successfully');
-    } catch (error) {
-      console.error('Error retrieving books:', error);
-      throw error;
-    }
-  }
+      const newBook = await Book.create({
+        title: 'The Legend',
+        authorId: 5, // Example authorId
+        genre: 'Fiction',
+        isbn: '12345678930',
+        publication_year: 2020
+      });
   
-  getAllBooks();
-  export async function getBookById(id: number): Promise<void> {
-    try {
-      const book = await Book.findByPk(id);
-      if (book) {
-        console.log('Book found:', book.toJSON());
-      } else {
-        console.log('Book not found');
-      }
+      console.log('New book created:', newBook.toJSON());
     } catch (error) {
-      console.error('Error retrieving book:', error);
-      throw error;
+      console.error('Error creating book:', error);
     }
   }
-  const bookIdToFind = 1; 
-  getBookById(bookIdToFind);
+  createBook();
 
-  export async function updateBook(id: number, updatedData: any): Promise<void> {
+  async function readBooks() {
     try {
-      const book = await Book.findByPk(id);
+      const books = await Book.findAll({
+        include: Author
+      });
+  
+      console.log('All books:', books.map(book => book.toJSON()));
+    } catch (error) {
+      console.error('Error fetching books:', error);
+    }
+  }
+  readBooks();
+
+  async function updateBook(bookId: number, updatedFields: Partial<any>) {
+    try {
+      const book = await Book.findByPk(bookId);
       if (book) {
-        await book.update(updatedData);
-        console.log('Book updated successfully');
+        await book.update(updatedFields);
+        console.log('Book updated successfully.');
       } else {
-        console.log('Book not found');
+        console.error('Book not found.');
       }
     } catch (error) {
       console.error('Error updating book:', error);
-      throw error;
     }
   }
-  
 
-  const bookIdToUpdate = 1;
-  const updatedData = {
-    title: 'Updated Title',
-    genre: 'Updated Genre',
-  
-  };
+  updateBook(1, {title:'Manadhe Idhantha'});
 
-  updateBook(bookIdToUpdate, updatedData);
-  
-  export async function deleteBookById(id: number): Promise<void> {
+  async function deleteBook(bookId: number) {
     try {
-      const book = await Book.findByPk(id);
+      const book = await Book.findByPk(bookId);
       if (book) {
         await book.destroy();
-        console.log('Book deleted successfully');
+        console.log('Book deleted successfully.');
       } else {
-        console.log('Book not found');
+        console.error('Book not found.');
       }
     } catch (error) {
       console.error('Error deleting book:', error);
-      throw error;
     }
   }
-  
-  
-  const bookIdToDelete = 1; 
-  deleteBookById(bookIdToDelete);*/
+
+  deleteBook(3);
