@@ -1,5 +1,6 @@
 import Book from '../models/books';
 import Author from '../models/authors';
+import { authorsData } from '../insert_data';
 
 // Example of creating a new author
 async function createAuthor() {
@@ -24,6 +25,7 @@ async function readAuthors() {
     try {
       const authors = await Author.findAll();
       console.log('All authors:', authors);
+      console.table(authors.map(author => author.toJSON));
     } catch (error) {
       console.error('Error fetching authors:', error);
     }

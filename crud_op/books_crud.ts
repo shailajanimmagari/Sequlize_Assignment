@@ -23,9 +23,11 @@ async function createBook() {
     try {
       const books = await Book.findAll({
         include: Author
+        
       });
   
       console.log('All books:', books.map(book => book.toJSON()));
+
     } catch (error) {
       console.error('Error fetching books:', error);
     }
@@ -46,7 +48,7 @@ async function createBook() {
     }
   }
 
-  updateBook(1, {title:'Manadhe Idhantha'});
+  updateBook(2, {title:'Manadhe Idhantha'});
 
   async function deleteBook(bookId: number) {
     try {
@@ -62,4 +64,4 @@ async function createBook() {
     }
   }
 
-  deleteBook(3);
+  deleteBook(6);

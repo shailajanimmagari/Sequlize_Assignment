@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var sequelize_1 = require("sequelize");
-var database_1 = require("../database");
-var Reservation = database_1.sequelizeInstance.define('Reservation', {
+const sequelize_1 = require("sequelize");
+const con_1 = __importDefault(require("../con"));
+const Reservation = con_1.default.define('Reservation', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,

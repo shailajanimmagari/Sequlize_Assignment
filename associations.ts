@@ -22,6 +22,6 @@ Reservation.belongsTo(Member,{foreignKey:'member_id'});
 Book.hasMany(Reservation,{foreignKey:'book_id'});
 Reservation.belongsTo(Book,{foreignKey:'book_id'});
 }*/
-export {Associations}
+export default Associations;
 
 
