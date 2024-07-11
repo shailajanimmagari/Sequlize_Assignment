@@ -4,6 +4,7 @@ import sequelize from '../con';
 
 
 
+
 const Book = sequelize.define('Book', {
   id: {
     type: DataTypes.INTEGER,
@@ -34,7 +35,13 @@ const Book = sequelize.define('Book', {
     type: DataTypes.INTEGER
   }
 }, {
-  tableName: 'books'
+  tableName: 'books',
+  indexes:[
+    {
+      unique: true,
+      fields:['authorId']//Here, we create a unique index on field of authorId
+    } 
+  ]
 });
 
 

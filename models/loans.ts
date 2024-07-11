@@ -30,7 +30,14 @@ const Loan = sequelize.define('Loan', {
     allowNull: false
   }
 }, {
-  tableName: 'loans'
+  tableName: 'loans',
+  indexes:[
+    {
+      unique: true,
+      fields:['book_id']
+    }
+  ]
+  
 });
 
 export default Loan;

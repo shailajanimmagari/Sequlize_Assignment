@@ -20,7 +20,13 @@ const Author = sequelize.define('Author', {
   }
 }, {
   tableName: 'authors',
-  timestamps: false // If you don't want createdAt and updatedAt fields
+  indexes:[
+    {
+      unique: true,
+      fields:['name'] // adding index for name column
+    }
+  ]
+  
 });
 
 export default Author;

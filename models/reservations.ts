@@ -26,7 +26,13 @@ const Reservation = sequelize.define('Reservation', {
     allowNull: false
   }
 }, {
-  tableName: 'reservations'
+  tableName: 'reservations',
+  indexes:[
+    {
+      unique: true,
+      fields:['book_id']
+    }
+  ]
 });
 
 export default Reservation;

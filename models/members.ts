@@ -24,7 +24,13 @@ const Member = sequelize.define('Member', {
     unique: true
   }
 }, {
-  tableName: 'members'
+  tableName: 'members',
+  indexes:[
+    {
+      unique: true,
+      fields:['name']
+    }
+  ]
 });
 
 export default Member;
