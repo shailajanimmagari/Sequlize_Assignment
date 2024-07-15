@@ -32,6 +32,12 @@ var Book = con_1.default.define('Book', {
         type: sequelize_1.DataTypes.INTEGER
     }
 }, {
-    tableName: 'books'
+    tableName: 'books',
+    indexes: [
+        {
+            unique: true,
+            fields: ['authorId'] //Here, we create a unique index on field of authorId
+        }
+    ]
 });
 exports.default = Book;

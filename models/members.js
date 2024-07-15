@@ -25,6 +25,12 @@ var Member = con_1.default.define('Member', {
         unique: true
     }
 }, {
-    tableName: 'members'
+    tableName: 'members',
+    indexes: [
+        {
+            unique: true,
+            fields: ['name']
+        }
+    ]
 });
 exports.default = Member;

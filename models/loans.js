@@ -31,6 +31,12 @@ var Loan = con_1.default.define('Loan', {
         allowNull: false
     }
 }, {
-    tableName: 'loans'
+    tableName: 'loans',
+    indexes: [
+        {
+            unique: true,
+            fields: ['book_id']
+        }
+    ]
 });
 exports.default = Loan;
